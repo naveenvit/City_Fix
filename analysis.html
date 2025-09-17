@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Analytics & Insights Dashboard</title>
+  <style>
+    body {
+      display: flex;
+      height: 100vh;
+      margin: 0;
+      background: #f5f6fa;
+      color: #333;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+    /* Sidebar same as other pages */
+    .sidebar {
+      width: 250px;
+      background: #fff;
+      border-right: 1px solid #e6e6e6;
+      padding: 20px 15px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 30px;
+    }
+    .logo-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: bold;
+    }
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+    }
+    .logo-text h3 {
+      font-size: 16px;
+      margin-bottom: 2px;
+    }
+    .logo-text span {
+      font-size: 12px;
+      color: #666;
+    }
+    .menu {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .menu-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px;
+      border-radius: 8px;
+      color: #333;
+      text-decoration: none;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .menu-item:hover,
+    .menu-item.active {
+      background: #f1f3f8;
+    }
+    .badge {
+      background: #f8e19a;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: bold;
+      color: #333;
+    }
+    .quick-actions {
+      margin-top: 30px;
+      font-size: 13px;
+      color: #555;
+    }
+    .quick-actions h4 {
+      margin-bottom: 10px;
+      font-size: 13px;
+    }
+    .quick-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .quick-item span {
+      font-size: 13px;
+    }
+    .quick-item .urgent {
+      background: #e63946;
+      color: #fff;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 12px;
+    }
+    .quick-item .notify {
+      background: #e9f0ff;
+      color: #111;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 12px;
+    }
+    .user-box {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      border-radius: 8px;
+      background: #fbfcff;
+      margin-top: 30px;
+    }
+    .user-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .user-details {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .user-details span {
+      font-size: 13px;
+      color: #333;
+    }
+    .user-details small {
+      font-size: 11px;
+      color: #666;
+    }
+    .logout-btn {
+      background: #f1f3f8;
+      border: none;
+      border-radius: 5px;
+      padding: 6px 8px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .main {
+      flex: 1;
+      padding: 20px 30px;
+      overflow-y: auto;
+      background: #f5f6fa;
+    }
+    h1 {
+      font-size: 28px;
+      margin-bottom: 5px;
+    }
+    .subtitle {
+      color: #555;
+      margin-bottom: 30px;
+    }
+    .controls {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    button {
+      padding: 8px 15px;
+      border: none;
+      background-color: #4CAF50;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    select {
+      padding: 8px 15px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    .metrics {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+    .card {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      flex: 1 1 220px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .card h2 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+    .card p {
+      font-size: 16px;
+      color: #555;
+    }
+    .green {
+      color: green;
+    }
+    .red {
+      color: red;
+    }
+    .trend-section {
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+    .chart {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      flex: 1 1 45%;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .chart h3 {
+      margin-bottom: 20px;
+      font-size: 20px;
+    }
+    canvas {
+      width: 100%;
+      height: 300px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div>
+      <div class="logo">
+        <div class="logo-icon">🏠</div>
+        <div class="logo-text">
+          <h3>CivicAdmin</h3>
+          <span>City Management</span>
+        </div>
+      </div>
+      <div class="menu">
+        <div class="menu-item" onclick="window.location.href='index.html'">Dashboard</div>
+        <div class="menu-item" onclick="window.location.href='reports.html'">Reports <span class="badge">23</span></div>
+        <div class="menu-item active" onclick="window.location.href='analytics.html'">Analytics</div>
+        <div class="menu-item" onclick="window.location.href='settings.html'">Settings</div>
+      </div>
+      <div class="quick-actions">
+  <h4>Quick Actions</h4>
+  <a href="urgent-reports.html" class="quick-item">
+    <span>Urgent Reports</span>
+    <span class="urgent">3</span>
+  </a>
+  <a href="notifications.html" class="quick-item">
+    <span>Notifications</span>
+    <span class="notify">•</span>
+  </a>
+</div>
+
+    </div>
+    <div class="user-box">
+      <div class="user-avatar">A</div>
+      <div class="user-details">
+        <span>Admin User</span>
+        <small>admin@city.gov</small>
+      </div>
+      <button class="logout-btn" title="Logout">&#x21bb;</button>
+    </div>
+  </aside>
+  <!-- Main -->
+  <main class="main">
+    <h1>Analytics & Insights</h1>
+    <p class="subtitle">Track performance and identify trends in civic reporting</p>
+    <div class="controls">
+      <select>
+        <option>Last 30 days</option>
+        <option>Last 7 days</option>
+        <option>Last year</option>
+      </select>
+      <select>
+        <option>Overview</option>
+        <option>Details</option>
+      </select>
+      <button>Export</button>
+    </div>
+    <div class="metrics">
+      <div class="card">
+        <h2>16.7%</h2>
+        <p>Resolution Rate<br><small class="green">+5.2% from last month</small></p>
+      </div>
+      <div class="card">
+        <h2>2.0 days</h2>
+        <p>Avg Resolution Time<br><small class="red">-8% from last month</small></p>
+      </div>
+      <div class="card">
+        <h2>92%</h2>
+        <p>Response Efficiency<br><small class="green">+3% from last month</small></p>
+      </div>
+      <div class="card">
+        <h2>4.6 / 5</h2>
+        <p>Citizen Satisfaction<br><small class="green">+2% from last month</small></p>
+      </div>
+    </div>
+    <div class="trend-section">
+      <div class="chart">
+        <h3>Reports vs Resolutions Trend</h3>
+        <canvas id="reportsTrendChart"></canvas>
+      </div>
+      <div class="chart">
+        <h3>Average Resolution Time by Category</h3>
+        <canvas id="categoryChart"></canvas>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+      const ctx1 = document.getElementById('reportsTrendChart').getContext('2d');
+      new Chart(ctx1, {
+        type: 'line',
+        data: {
+          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+          datasets: [{
+            label: 'Reports',
+            data: [45, 50, 47, 55, 52, 63],
+            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            fill: true,
+            tension: 0.4
+          }, {
+            label: 'Resolutions',
+            data: [42, 48, 46, 53, 50, 60],
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            fill: true,
+            tension: 0.4
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            y: { beginAtZero: true }
+          }
+        }
+      });
+
+      const ctx2 = document.getElementById('categoryChart').getContext('2d');
+      new Chart(ctx2, {
+        type: 'line',
+        data: {
+          labels: ['Pothole', 'Streetlight', 'Sanitation', 'Sidewalk', 'Graffiti', 'Other'],
+          datasets: [{
+            label: 'Avg Resolution Time (days)',
+            data: [3.2, 2.1, 1.5, 5.2, 2.8, 4.1],
+            backgroundColor: 'rgba(153, 102, 255, 0.2)',
+            borderColor: 'rgba(153, 102, 255, 1)',
+            fill: true,
+            tension: 0.4
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            y: { beginAtZero: true }
+          }
+        }
+      });
+    </script>
+  </main>
+</body>
+</html>
