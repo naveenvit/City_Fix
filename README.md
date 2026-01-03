@@ -65,6 +65,6 @@ CITY FIX is a platform that empowers citizens to raise urban issues (like pothol
 ---
 
 ## 📜 License
-This project is licensed under the **tesm Certified Bots working in DataQuest 2.0 Hackathon**.  
+This project is licensed under the **team Certified Bots working in DataQuest 2.0 Hackathon**.  
 
 ---
