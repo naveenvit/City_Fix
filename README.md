@@ -45,12 +45,12 @@ CITY FIX is a platform that empowers citizens to raise urban issues (like pothol
 
 ## 🛠 Tech Stack
 - **Design**: Figma  
-- **Frontend (Mobile)**: React Native / Flutter *(choose one)*  
-- **Frontend (Web Dashboard)**: React.js / Next.js *(choose one)*  
-- **Backend**: Node.js / Express / Django *(choose one)*  
-- **Database**: MongoDB / PostgreSQL / MySQL *(choose one)*  
-- **Authentication**: Firebase / JWT / OAuth *(choose one)*  
-- **Deployment**: Docker / AWS / Vercel / Netlify *(choose one)*  
+- **Frontend (Mobile)**: React Native / Flutter  
+- **Frontend (Web Dashboard)**: React.js / Next.js
+- **Backend**: Node.js / Express / Django
+- **Database**: MongoDB / PostgreSQL / MySQL
+- **Authentication**: Firebase / JWT / OAuth 
+- **Deployment**: Docker / AWS / Vercel / Netlify
 
 ---
 
